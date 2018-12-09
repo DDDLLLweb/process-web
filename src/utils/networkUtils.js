@@ -6,9 +6,9 @@ import pathToRegexp from 'path-to-regexp'
 import { message, Modal } from 'antd'
 import moment from 'moment'
 import { codeMap } from '../utils/enums'
-import { default as config } from './config';
-const { api, baseURL, CORS, YQL } = config;
-const { basic } = api;
+import { default as config } from './config'
+const { api, baseURL, CORS, YQL } = config
+const { basic } = api
 /*
  * Network utility functions
  */
@@ -31,7 +31,7 @@ axios.interceptors.request.use(
     if (config.method === 'get') {
       config.params = {
         _t: Date.parse(new Date()) / 1000,
-        ...config.params
+        ...config.params,
       }
     }
     return config

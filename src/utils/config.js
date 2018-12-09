@@ -1,4 +1,4 @@
-const apiConfig = require('./apiConfig');
+const apiConfig = require('./apiConfig')
 
 export default {
   name: '进击之路',
@@ -26,7 +26,7 @@ export default {
     app: {
       menus: '/api/menus',// 获取菜单
 
-      metaq: '/api/metaqs'
+      metaq: '/api/metaqs',
     },
   },
 }

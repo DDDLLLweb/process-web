@@ -1,6 +1,6 @@
-import React from 'react';
-import { Route } from 'react-router-dom';
-import { MainContent } from '../components/';
+import React from 'react'
+import { Route } from 'react-router-dom'
+import { MainContent } from '../components/'
 import Metaqtable from '../containers/metactl'
 export const childRoutes = [
   {

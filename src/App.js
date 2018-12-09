@@ -1,56 +1,56 @@
-import React,{ Component } from 'react';
-import { Layout} from 'antd';
-import { connect } from 'react-redux';
+import React,{ Component } from 'react'
+import { Layout} from 'antd'
+import { connect } from 'react-redux'
 import { API_PRINCIPAL } from './redux/action/app' 
-import './App.less';
-import './style/index.less';
-import {HeaderCustom,SiderMenu} from './components/';
-import { routesNode,childRoutes } from './routes';
-const { Content, Footer ,Sider} = Layout;
+import './App.less'
+import './style/index.less'
+import {HeaderCustom,SiderMenu} from './components/'
+import { routesNode,childRoutes } from './routes'
+const { Content, Footer ,Sider} = Layout
 class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            collapsed: false,
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      collapsed: false,
     }
+  }
 
-    componentDidMount () {
-       const { dispatch } = this.props;
-        dispatch({
-            type: API_PRINCIPAL
-        })
-    }
+  componentDidMount () {
+    const { dispatch } = this.props
+    dispatch({
+      type: API_PRINCIPAL,
+    })
+  }
 
     onCollapse = (collapsed) => {
-        this.setState({
-            collapsed
-        });
+      this.setState({
+        collapsed,
+      })
     }
     render() {
-        const { auth } = this.props;
-        console.log(childRoutes);
-        return (
-            <Layout style={{ minHeight: '100vh' }}>
-                <Sider
-                collapsible
-                collapsed={this.state.collapsed}
-                onCollapse={this.onCollapse}
-                >
-                <div className="logo" />
-                <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
-                </Sider>
-                <Layout>
-                <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
-                <Content style={{ margin: '0 16px' }}>
-                    { routesNode }
-                </Content>
-                <Footer style={{ textAlign: 'center' }}>
+      const { auth } = this.props
+      console.log(childRoutes)
+      return (
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            collapsible
+            collapsed={this.state.collapsed}
+            onCollapse={this.onCollapse}
+          >
+            <div className="logo" />
+            <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
+          </Sider>
+          <Layout>
+            <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
+            <Content style={{ margin: '0 16px' }}>
+              { routesNode }
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
                     Ant Design ©2016 Created by Ant UED
-                </Footer>
-                </Layout>
-            </Layout>
-        );
+            </Footer>
+          </Layout>
+        </Layout>
+      )
     }
 }
 // 负责输入逻辑 即将state 映射到UI组件的参数（props）
@@ -67,4 +67,4 @@ class App extends Component {
 //     dispatch
 //   );
 
-export default connect(({dispatch,app}) => ({ dispatch,app }))(App);
+export default connect(({dispatch,app}) => ({ dispatch,app }))(App)
