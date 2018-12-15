@@ -17,16 +17,15 @@ export default {
   api: {
     basic: {
       csrf: '/api/sec/csrf', // CSRF检查
-      userLogin: '/sec/login', // 登录
+      userLogin: '/api/sec/login', // 登录
       userLogout: '/sec/logout', // 退出
       captcha: '/sec/captcha', // 验证码
-      principal: '/sec/principal', // 登录用户上下文
+      principal: '/auth/api/sec/principal', // 登录用户上下文
       resetPW: 'api/ui/password/update',
     },
     app: {
-      menus: '/api/menus',// 获取菜单
-
-      metaq: '/api/metaqs',
+      menus: '/auth/api/menus',// 获取菜单
+      users: '/auth/api/users',// 获取系统用户
     },
   },
 }

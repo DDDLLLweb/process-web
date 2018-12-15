@@ -3,7 +3,7 @@ import qs from 'qs'
 import jsonp from 'jsonp'
 import lodash from 'lodash'
 import pathToRegexp from 'path-to-regexp'
-import { message, Modal } from 'antd'
+// import { message, Modal } from 'antd'
 import moment from 'moment'
 import { codeMap } from '../utils/enums'
 import { default as config } from './config'
@@ -13,7 +13,7 @@ const { basic } = api
  * Network utility functions
  */
 
-let failed = false
+// let failed = false
 
 // Default config of axios
 console.info(`API Server: ${baseURL}`)
@@ -50,6 +50,7 @@ axios.interceptors.response.use((response) => {
 
 // anti-CSRF
 const RESULT_CODE = 'el-result-code' // WebUtil#RESULT_CODE
+const AUTHIZARION = 'PS_ACCESS_TOKEN'
 let _csrfHeaders
 const csrf = (() => axios.get(basic.csrf)
   .then((res) => {
@@ -57,7 +58,11 @@ const csrf = (() => axios.get(basic.csrf)
     _csrfHeaders = headers => ({ ...headers, 'el-xsrf': csrfToken }) // WebUtil#XSRF_NAME
   }))
 
-const csrfHeaders = headers => _csrfHeaders && _csrfHeaders(headers)
+const makeHeaders = headers => {
+  const accessToken = localStorage.getItem(AUTHIZARION)
+  console.log('---===--,{}', accessToken)
+  return Object.assign({}, _csrfHeaders(headers), { 'Authorization': `Bearer ${accessToken}` })
+}
 
 // Helpers
 const errorDecoder = code => code && codeMap.filter(c => c.code === code)[0].message
@@ -77,7 +82,6 @@ const fetch = (options) => {
 
   try {
     let domain = ''
-    console.log('======',url)
     if (url.match(/[a-zA-z]+:\/\/[^/]*/)) {
       domain = url.match(/[a-zA-z]+:\/\/[^/]*/)[0]
       url = url.slice(domain.length)
@@ -91,7 +95,7 @@ const fetch = (options) => {
     }
     url = domain + url
   } catch (e) {
-    message.error(e.message)
+    // message.error(e.message)
   }
 
   if (fetchType === 'JSONP') {
@@ -116,14 +120,14 @@ const fetch = (options) => {
     case 'get':
       return axios.get(url, {
         params: cloneData,
-        headers: csrfHeaders(),
+        headers: makeHeaders(),
         paramsSerializer,
       })
     case 'post':
       return axios.post(url,
         cloneData,
         {
-          headers: csrfHeaders(),
+          headers: makeHeaders(),
         },
       )
     case 'form':
@@ -131,33 +135,33 @@ const fetch = (options) => {
         {},
         {
           params: cloneData,
-          headers: csrfHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
+          headers: makeHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' }),
           paramsSerializer,
         },
       )
     case 'delete':
       return axios.delete(url, {
-        headers: csrfHeaders(),
+        headers: makeHeaders(),
         data: cloneData,
       })
     case 'put':
       return axios.put(url,
         cloneData,
         {
-          headers: csrfHeaders(),
+          headers: makeHeaders(),
         })
     case 'patch':
       return axios.patch(url,
         cloneData,
         {
-          headers: csrfHeaders(),
+          headers: makeHeaders(),
         })
     case 'upload':
       return axios.post(url,
         data,
         {
           timeout: 100000,
-          headers: csrfHeaders({
+          headers: makeHeaders({
             'Content-Type': 'multipart/form-data',
             // 'X-Requested-With': 'XMLHttpRequest',
           }),
@@ -181,7 +185,7 @@ const request = (options) => {
       }
     }
   }
-  
+
   return fetch(options).then((response) => {
     const { headers, status } = response
     let data = options.fetchType === 'YQL' ? response.data.query.results.json : response.data
@@ -202,40 +206,40 @@ const request = (options) => {
   }).catch((error) => {
     const { response } = error
     if (response) {
-      if (error.response.status === 401) {
-        !failed && Modal.error({
-          title: '登陆超时',
-          content: '请重新登陆',
-          okText: '好',
-          onOk: () => {
-            setTimeout(() => {
-              window.location.href = '/login'
-            }, 3)
-          },
-        })
-        failed = true
-      } else if (error.response.status === 410) {
-        Modal.error({
-          title: '警告',
-          content: '您的账号已经在其它设备登录，您被迫下线',
-          okText: '好',
-          onOk: () => {
-            setTimeout(() => {
-              window.location.href = '/login'
-            }, 3)
-          },
-        })
-      } else if (error.response.status === 500) {
-        return { success: false, status: 500, message: '服务端错误！' }
-      }
+      // if (error.response.status === 401) {
+      // !failed && Modal.error({
+      //   title: '登陆超时',
+      //   content: '请重新登陆',
+      //   okText: '好',
+      //   onOk: () => {
+      //     setTimeout(() => {
+      //       window.location.href = '/login'
+      //     }, 3)
+      //   },
+      // })
+      // failed = true
+      // } else if (error.response.status === 410) {
+      //   Modal.error({
+      //     title: '警告',
+      //     content: '您的账号已经在其它设备登录，您被迫下线',
+      //     okText: '好',
+      //     onOk: () => {
+      //       setTimeout(() => {
+      //         window.location.href = '/login'
+      //       }, 3)
+      //     },
+      //   })
+      // } else if (error.response.status === 500) {
+      //   return { success: false, status: 500, message: '服务端错误！' }
+      // }
       const { headers, status, data } = response
       const otherData = data
       const msg = data.message || headers[RESULT_CODE]
       return { success: false, status, message: msg, ...otherData }
     }
-    const status = 600
-    const msg = 'Network Error'
-    return { success: false, status, message: msg }
+    // const status = 600
+    // const msg = 'Network Error'
+    // return { success: false, status, message: msg }
   })
 }
 

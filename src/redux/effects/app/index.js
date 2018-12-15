@@ -16,8 +16,10 @@ export function* principal() {
   }
 }
 export function* doLogin({payload}) {
-  const data = yield call(appService.login,payload)
+  const user = Object.assign({},{grantType: 'password',scope: 'app'},payload)
+  const data = yield call(appService.login,user)
   if(data.success) {
+    localStorage.setItem("PS_ACCESS_TOKEN",data.data.access_token)
     yield put(push('/'))
   } else {
     message.warning(data.message,3)
@@ -34,7 +36,6 @@ export function* doLoginOut() {
 export function* doGetMenu() {
   const data = yield call(appService.getMenuItem)
   if(data.success) {
-    console.log('+++++',data)
     yield put({
       type: STATE_MENU ,
       payload: { menu: data.data },

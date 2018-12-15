@@ -42,11 +42,11 @@ class App extends Component {
           </Sider>
           <Layout>
             <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
-            <Content style={{ margin: '0 16px' }}>
+            <Content>
               { routesNode }
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©2016 Created by Ant UED
+                    Ant Design ©2018 Created by DL
             </Footer>
           </Layout>
         </Layout>

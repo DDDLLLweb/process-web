@@ -14,7 +14,7 @@ export async function getPrincipal() {
 export async function login(data) {
   return request({
     url: userLogin,
-    method: 'form',
+    method: 'post',
     data: data,
   })
 }

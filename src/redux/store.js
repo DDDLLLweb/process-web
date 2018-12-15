@@ -1,5 +1,5 @@
-import { createStore,combineReducers,compose,applyMiddleware } from 'redux'
-import { app, login,metaq } from './reducer/'
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
+import { app, login, metaq, users } from './reducer/'
 import { routerReducer, routerMiddleware } from 'react-router-redux'
 import createHistory from 'history/createBrowserHistory'
 import createSagaMiddleware from 'redux-saga'
@@ -16,6 +16,7 @@ const reducer = combineReducers({
   app,
   login,
   metaq,
+  users,
   router: routerReducer,
 })
 
@@ -27,11 +28,10 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 // compose 从右到左来组合多个函数。
-const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers) 
+const composedEnhancers = compose(applyMiddleware(...middleware), ...enhancers)
 
 export default function configureStore() {
-  const store = createStore(reducer, initialState,composedEnhancers)
+  const store = createStore(reducer, initialState, composedEnhancers)
   sagaMiddleware.run(rootSaga)
   return store
 }
-   

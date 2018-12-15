@@ -1,7 +1,7 @@
 import SiderMenu from './sider/'
 import HeaderCustom from './header'
 import MainContent from './maincontent'
-import DataTable from './datatable'
+import DataTable from './Datatable'
 export {
   SiderMenu,
   HeaderCustom,

@@ -4,7 +4,7 @@
 import React from 'react'
 import { DO_CAPTCHA } from '../../redux/action/login'
 import { DO_LOGIN } from '../../redux/action/app'
-import { Avatar, Form, Icon, Input, Col, Row } from 'antd'
+import { Avatar, Form, Icon, Input,Button } from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import b1 from '../../style/imgs/b1.jpg'
@@ -27,9 +27,9 @@ class LoginForm extends React.Component {
     if (user) {
       dispatch(push('/app'))
     } else {
-      dispatch({
-        type: DO_CAPTCHA,
-      })
+      // dispatch({
+      //   type: DO_CAPTCHA,
+      // })
     }
   }
   handleSubmit = (e) => {
@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
 
   render() {
     const { getFieldDecorator } = this.props.form
-    const { captcha } = this.props.login
+    // const { captcha } = this.props.login
     return (
       <div>
         <SnowStorm />
@@ -76,7 +76,7 @@ class LoginForm extends React.Component {
               <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="密码" />
             )}
           </FormItem>
-          <FormItem>
+          {/**<FormItem>
             <Row gutter={8}>
               <Col span={12}>
                 {getFieldDecorator('captcha', {
@@ -89,18 +89,18 @@ class LoginForm extends React.Component {
                 <img src={captcha} alt="captcha" className="captcha" />
               </Col>
             </Row>
-          </FormItem>
-          {/**<FormItem>
-            {getFieldDecorator('rememberMe', {
+              </FormItem>**/}
+          <FormItem>
+            {/**{getFieldDecorator('rememberMe', {
               valuePropName: 'checked',
               initialValue: true,
             })(
               <Checkbox>记住我</Checkbox>
-            )}
+            )}**/}
             <Button type="primary" htmlType="submit" className="login-form-button">
               登录
             </Button>
-          </FormItem>**/}
+          </FormItem>
         </Form>
       </div>
     )
