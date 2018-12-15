@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import { MainContent } from '../components/'
-import Metaqtable from '../containers/metactl'
+import Metaqtable from '../pages/metactl'
 export const childRoutes = [
   {
     'path':'/app/dashboard',

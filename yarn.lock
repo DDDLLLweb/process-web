@@ -3430,6 +3430,10 @@ fs.realpath@^1.0.0:
   version "1.0.0"
   resolved "http://registry.npm.taobao.org/fs.realpath/download/fs.realpath-1.0.0.tgz#1504ad2523158caa40db4a2787cb01411994ea4f"
 
+fs@^0.0.1-security:
+  version "0.0.1-security"
+  resolved "http://registry.npm.taobao.org/fs/download/fs-0.0.1-security.tgz#8a7bd37186b6dddf3813f23858b57ecaaf5e41d4"
+
 fsevents@^1.0.0, fsevents@^1.1.2:
   version "1.2.4"
   resolved "http://registry.npm.taobao.org/fsevents/download/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
@@ -5616,6 +5620,12 @@ onetime@^2.0.0:
   resolved "http://registry.npm.taobao.org/onetime/download/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
   dependencies:
     mimic-fn "^1.0.0"
+
+opentype.js@^0.7.3:
+  version "0.7.3"
+  resolved "http://registry.npm.taobao.org/opentype.js/download/opentype.js-0.7.3.tgz#40fb8ce18bfd60e74448efdfe442834098397aab"
+  dependencies:
+    tiny-inflate "^1.0.2"
 
 opn@5.2.0:
   version "5.2.0"
@@ -7815,6 +7825,12 @@ supports-color@^5.3.0, supports-color@^5.4.0:
   dependencies:
     has-flag "^3.0.0"
 
+svg-captcha@^1.3.12:
+  version "1.3.12"
+  resolved "http://registry.npm.taobao.org/svg-captcha/download/svg-captcha-1.3.12.tgz#fe4113713228e9a149fd861dc684b7a97419b55d"
+  dependencies:
+    opentype.js "^0.7.3"
+
 svgo@^0.7.0:
   version "0.7.2"
   resolved "http://registry.npm.taobao.org/svgo/download/svgo-0.7.2.tgz#9f5772413952135c6fefbf40afe6a4faa88b4bb5"
@@ -7937,6 +7953,10 @@ timers-browserify@^2.0.4:
   resolved "http://registry.npm.taobao.org/timers-browserify/download/timers-browserify-2.0.10.tgz#1d28e3d2aadf1d5a5996c4e9f95601cd053480ae"
   dependencies:
     setimmediate "^1.0.4"
+
+tiny-inflate@^1.0.2:
+  version "1.0.2"
+  resolved "http://registry.npm.taobao.org/tiny-inflate/download/tiny-inflate-1.0.2.tgz#93d9decffc8805bd57eae4310f0b745e9b6fb3a7"
 
 tinycolor2@^1.4.1:
   version "1.4.1"

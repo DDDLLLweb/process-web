@@ -16,7 +16,7 @@ export default {
   apiPrefix: '/api',
   api: {
     basic: {
-      csrf: '/sec/xsrf', // CSRF检查
+      csrf: '/api/sec/csrf', // CSRF检查
       userLogin: '/sec/login', // 登录
       userLogout: '/sec/logout', // 退出
       captcha: '/sec/captcha', // 验证码

@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 import { ConnectedRouter } from 'react-router-redux'
 import configureStore,{ history } from './redux/store'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import LoginForm from './containers/login/'
+import LoginForm from './pages/login/'
 import App from './App'
 // import { MainContent } from './components/';
 import { networkUtils } from './utils'
