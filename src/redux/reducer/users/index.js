@@ -1,9 +1,8 @@
-import { REC_GET_USERS } from '../../action/users'
+import { REC_GET_USERS, REC_SHOW_MODAL, REC_HIDE_MODAL, REC_USER_SINGLE } from '../../action/users'
 
 const pages = (state, payload) => {
-  const { users }  = state
-  const newUsers = Object.assign({}, users, payload)
-  return updateState(users, newUsers)
+  const newUsers = Object.assign({}, state, payload)
+  return newUsers
 }
 
 const updateState = (state, payload) => {
@@ -13,12 +12,18 @@ const updateState = (state, payload) => {
   }
 }
 
-const users = (state, { type, payload }) => {
+const users = (state = {}, { type, payload }) => {
   switch (type) {
     case REC_GET_USERS:
       return pages(state, payload)
+    case REC_SHOW_MODAL:
+      return updateState(state, payload)
+    case REC_HIDE_MODAL:
+      return updateState(state, payload)
+    case REC_USER_SINGLE:
+      return Object.assign({}, state, {currentItem: payload})
     default:
-      return { ...users, ...payload }
+      return state
   }
 }
 export default users

@@ -1,14 +1,14 @@
-import React,{ Component } from 'react'
-import { Layout} from 'antd'
+import React, { Component } from 'react'
+import { Layout } from 'antd'
 import { connect } from 'react-redux'
-import { API_PRINCIPAL } from './redux/action/app' 
+import { API_PRINCIPAL } from './redux/action/app'
 import './App.less'
 import './style/index.less'
-import {HeaderCustom,SiderMenu} from './components/'
-import { routesNode,childRoutes } from './routes'
-import {  LocaleProvider } from 'antd'
+import { HeaderCustom, SiderMenu } from './components/'
+import { routesNode } from './routes'
+import { LocaleProvider } from 'antd'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
-const { Content, Footer ,Sider} = Layout
+const { Content, Footer, Sider } = Layout
 class App extends Component {
   constructor(props) {
     super(props)
@@ -16,59 +16,42 @@ class App extends Component {
       collapsed: false,
     }
   }
-
-  componentDidMount () {
+  componentDidMount() {
     const { dispatch } = this.props
     dispatch({
       type: API_PRINCIPAL,
     })
   }
-
-    onCollapse = (collapsed) => {
-      this.setState({
-        collapsed,
-      })
-    }
-    render() {
-      const { auth } = this.props
-      console.log(childRoutes)
-      return (
-        <LocaleProvider locale={zhCN}>
-          <Layout style={{ minHeight: '100vh' }}>
-            <Sider
-              collapsible
-              collapsed={this.state.collapsed}
-              onCollapse={this.onCollapse}
-            >
-              <div className="logo" />
-              <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
-            </Sider>
-            <Layout>
-              <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
-              <Content>
-                { routesNode }
-              </Content>
-              <Footer style={{ textAlign: 'center' }}>
-                      Ant Design ©2018 Created by DL
-              </Footer>
-            </Layout>
+  onCollapse = (collapsed) => {
+    this.setState({
+      collapsed,
+    })
+  }
+  render() {
+    const { auth } = this.props
+    return (
+      <LocaleProvider locale={zhCN}>
+        <Layout style={{ minHeight: '100vh' }}>
+          <Sider
+            collapsible
+            collapsed={this.state.collapsed}
+            onCollapse={this.onCollapse}
+          >
+            <div className="logo" />
+            <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
+          </Sider>
+          <Layout>
+            <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={{ auth } || {}} />
+            <Content>
+              {routesNode}
+            </Content>
+            <Footer style={{ textAlign: 'center' }}>
+              Ant Design ©2018 Created by DL
+            </Footer>
           </Layout>
-        </LocaleProvider>
-      )
-    }
+        </Layout>
+      </LocaleProvider>
+    )
+  }
 }
-// 负责输入逻辑 即将state 映射到UI组件的参数（props）
-// const mapStateToProps = state => {
-//     // return {auth, responsive};
-// };
-// 负责输出逻辑 即将用户对UI组件的操作映射成Action 从UI组件传出去
-// Redux中的bindActionCreators，是通过dispatch将action包裹起来，这样可以通过bindActionCreators创建的方法，直接调用dispatch(action)(隐式调用）
-// const mapDispatchToProps = dispatch => 
-//     bindActionCreators({
-//       queryXsrf,
-//       changePage: () => push('/login')
-//     },
-//     dispatch
-//   );
-
-export default connect(({dispatch,app}) => ({ dispatch,app }))(App)
+export default connect(({ dispatch, app }) => ({ dispatch, app }))(App)

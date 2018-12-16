@@ -57,117 +57,96 @@ class DataTable extends Component {
   }
   renderHeader = () => {
     const { selectedRowKeys, selectedRows, searchBarForm } = this.state
-    const {
-      showAdd,
-      showEdit,
-      showView,
-      showDelete,
-      buttons,
-
-    } = this.props
+    const { buttons } = this.props
     return (
       <Row>
         <Col span={18}>
-          {showAdd !== false && (
-            <Button key="add" type="primary" onClick={this.onAddItem}>
-              新增
-            </Button>
-          )}
-          {selectedRowKeys.length > 0 && [
-            selectedRowKeys.length === 1 && [
-              showEdit !== false && (
-                <Button key="edit" type="primary" style={{ marginLeft: 8 }} onClick={this.onEditItem}>
-                  修改
-                </Button>
-              ),
-              showView !== false && (
-                <Button key="view" type="primary" style={{ marginLeft: 8 }} onClick={this.onViewItem}>
-                  查看
-                </Button>
-              ),
-            ],
-            <Popconfirm key="pop" title={'确定要删除这些记录么?'} placement="left" onConfirm={this.onDeleteItems} okText="是" cancelText="否">
-              {showDelete !== false && (
-                <Button
-                  key="delete"
-                  type="primary"
-                  style={{ marginLeft: 8 }}
-                >
-                  删除
-                </Button>
-              )}
-            </Popconfirm>,
-          ]}
           {buttons &&
-          buttons.map(b => {
-            if (b.hidden) return null
-            if (b.requiredSelected === 1 && selectedRowKeys.length === 1) {
-              return (
-                <Button
-                  key={b.key}
-                  disabled={b.disabled}
-                  type={b.type}
-                  onClick={() => {
-                    b.cb(selectedRowKeys, searchBarForm, selectedRows)
-                    this.setState({
-                      selectedRowKeys: [],
-                      selectedRows: [],
-                    })
-                  }}
-                  style={{ marginLeft: 8 }}
-                  loading={b.loading}
-                >
-                  {b.name}
-                </Button>
-              )
-            } else if (b.requiredSelected === 2 && selectedRowKeys.length >= 1) {
-              return (
-                <Button
-                  key={b.key}
-                  disabled={b.disabled}
-                  type={b.type}
-                  onClick={() => {
-                    b.cb(selectedRowKeys, searchBarForm, selectedRows)
-                    this.setState({
-                      selectedRowKeys: [],
-                      selectedRows: [],
-                    })
-                  }}
-                  style={{ marginLeft: 8 }}
-                  loading={b.loading}
-                >
-                  {b.name}
-                </Button>
-              )
-            } else if (b.requiredSelected === -1 && selectedRowKeys.length >= 1) {
-              return (
-                <Popconfirm
-                  key={b.key}
-                  title={'确定要删除这些记录么?'}
-                  placement="left"
-                  onConfirm={() => b.cb(selectedRowKeys, searchBarForm, selectedRows)}
-                >
-                  <Button type={b.type} style={{ marginLeft: 8 }} loading={b.loading}>
+            buttons.map(b => {
+              if (b.visible === false) return null
+              if(b.action === 'add') {
+                return (
+                  <Button
+                    key={b.key}
+                    disabled={b.disabled}
+                    type={b.type}
+                    onClick={() => {
+                      b.cb()
+                      this.setState({
+                        selectedRowKeys: [],
+                        selectedRows: [],
+                      })
+                    }}
+                    style={{ marginLeft: 8 }}
+                    loading={b.loading}
+                  >
                     {b.name}
                   </Button>
-                </Popconfirm>
-              )
-            } else if (b.requiredSelected === 0) {
-              return (
-                <Button
-                  key={b.key}
-                  disabled={b.disabled}
-                  type={b.type}
-                  onClick={() => b.cb(selectedRowKeys, searchBarForm, selectedRows)}
-                  style={{ marginLeft: 8 }}
-                  loading={b.loading}
-                >
-                  {b.name}
-                </Button>
-              )
-            }
-            return null
-          })}
+                )
+              } else if (b.action === 'update' || b.action === 'view') {
+                if (selectedRowKeys.length === 1) {
+                  return (
+                    <Button
+                      key={b.key}
+                      disabled={b.disabled}
+                      type={b.type}
+                      onClick={() => {
+                        b.cb(selectedRowKeys, searchBarForm, selectedRows)
+                        this.setState({
+                          selectedRowKeys: [],
+                          selectedRows: [],
+                        })
+                      }}
+                      style={{ marginLeft: 8 }}
+                      loading={b.loading}
+                    >
+                      {b.name}
+                    </Button>
+                  )
+                }
+              } else if (b.action === 'delete') {
+                if (selectedRowKeys.length >= 1) {
+                  return (
+                    <Popconfirm
+                      key={b.key}
+                      title={'确定要删除这些记录么?'}
+                      placement="left"
+                      onConfirm={() => {
+                        b.cb(selectedRowKeys, searchBarForm, selectedRows)
+                        this.setState({
+                          selectedRowKeys: [],
+                          selectedRows: [],
+                        })
+                      }
+                      }
+                    >
+                      <Button type={b.type} style={{ marginLeft: 8 }} loading={b.loading}>
+                        {b.name}
+                      </Button>
+                    </Popconfirm>
+                  )
+                }
+              } else {
+                return (
+                  <Button
+                    key={b.key}
+                    disabled={b.disabled}
+                    type={b.type}
+                    onClick={() => {
+                      b.cb(selectedRowKeys, searchBarForm, selectedRows)
+                      this.setState({
+                        selectedRowKeys: [],
+                        selectedRows: [],
+                      })
+                    }}
+                    style={{ marginLeft: 8 }}
+                    loading={b.loading}
+                  >
+                    {b.name}
+                  </Button>
+                )
+              }
+            })}
           {selectedRowKeys.length > 0 && (
             <span key="total" style={{ fontSize: 13, marginLeft: 10 }}>
               选择了 {selectedRowKeys.length} 条记录
@@ -181,7 +160,7 @@ class DataTable extends Component {
   render() {
     const {
       rowSelection,
-      dataSource, loading, fetchAction,filter,
+      dataSource, loading, fetchAction, filter,
       enableSelection, enableDoubleClick, enablePagination, showReset,
       onSelect, validToSelect, ...tableProps
     } = this.props

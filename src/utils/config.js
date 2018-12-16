@@ -26,6 +26,7 @@ export default {
     app: {
       menus: '/auth/api/menus',// 获取菜单
       users: '/auth/api/users',// 获取系统用户
+      user: '/auth/api/user', // 用户新增或修改
     },
   },
 }
