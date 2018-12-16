@@ -6,6 +6,8 @@ import './App.less'
 import './style/index.less'
 import {HeaderCustom,SiderMenu} from './components/'
 import { routesNode,childRoutes } from './routes'
+import {  LocaleProvider } from 'antd'
+import zhCN from 'antd/lib/locale-provider/zh_CN'
 const { Content, Footer ,Sider} = Layout
 class App extends Component {
   constructor(props) {
@@ -31,25 +33,27 @@ class App extends Component {
       const { auth } = this.props
       console.log(childRoutes)
       return (
-        <Layout style={{ minHeight: '100vh' }}>
-          <Sider
-            collapsible
-            collapsed={this.state.collapsed}
-            onCollapse={this.onCollapse}
-          >
-            <div className="logo" />
-            <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
-          </Sider>
-          <Layout>
-            <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
-            <Content>
-              { routesNode }
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>
-                    Ant Design ©2018 Created by DL
-            </Footer>
+        <LocaleProvider locale={zhCN}>
+          <Layout style={{ minHeight: '100vh' }}>
+            <Sider
+              collapsible
+              collapsed={this.state.collapsed}
+              onCollapse={this.onCollapse}
+            >
+              <div className="logo" />
+              <SiderMenu inlineCollapsed={this.state.collapsed} theme="dark" />
+            </Sider>
+            <Layout>
+              <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={ {auth}|| {}} />
+              <Content>
+                { routesNode }
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>
+                      Ant Design ©2018 Created by DL
+              </Footer>
+            </Layout>
           </Layout>
-        </Layout>
+        </LocaleProvider>
       )
     }
 }
