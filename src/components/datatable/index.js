@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Col, Popconfirm, Row, Table } from 'antd'
 import SearchBar from './SearchBar'
+import { stringUtil } from '../../utils/'
 class DataTable extends Component {
 
   constructor(props) {
@@ -67,7 +68,7 @@ class DataTable extends Component {
               if(b.action === 'add') {
                 return (
                   <Button
-                    key={b.key}
+                    key={stringUtil.getGuid()}
                     disabled={b.disabled}
                     type={b.type}
                     onClick={() => {
@@ -87,7 +88,7 @@ class DataTable extends Component {
                 if (selectedRowKeys.length === 1) {
                   return (
                     <Button
-                      key={b.key}
+                      key={stringUtil.getGuid()}
                       disabled={b.disabled}
                       type={b.type}
                       onClick={() => {
@@ -108,7 +109,7 @@ class DataTable extends Component {
                 if (selectedRowKeys.length >= 1) {
                   return (
                     <Popconfirm
-                      key={b.key}
+                      key={stringUtil.getGuid()}
                       title={'确定要删除这些记录么?'}
                       placement="left"
                       onConfirm={() => {
@@ -129,7 +130,7 @@ class DataTable extends Component {
               } else {
                 return (
                   <Button
-                    key={b.key}
+                    key={stringUtil.getGuid()}
                     disabled={b.disabled}
                     type={b.type}
                     onClick={() => {
