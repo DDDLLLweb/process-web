@@ -2,7 +2,7 @@ import { REC_GET_USERS, REC_SHOW_MODAL, REC_HIDE_MODAL, REC_USER_SINGLE } from '
 
 const pages = (state, payload) => {
   const newUsers = Object.assign({}, state, payload)
-  return newUsers
+  return updateState(state,newUsers)
 }
 
 const updateState = (state, payload) => {
@@ -10,6 +10,11 @@ const updateState = (state, payload) => {
     ...state,
     ...payload,
   }
+}
+
+const updateItem = (state,payload) => {
+  const newUser = Object.assign({}, state, {currentItem: payload})
+  return newUser
 }
 
 const users = (state = {}, { type, payload }) => {
@@ -21,7 +26,8 @@ const users = (state = {}, { type, payload }) => {
     case REC_HIDE_MODAL:
       return updateState(state, payload)
     case REC_USER_SINGLE:
-      return Object.assign({}, state, {currentItem: payload})
+      // return Object.assign({}, state, {currentItem: payload})
+      return updateItem(state,payload)
     default:
       return state
   }
