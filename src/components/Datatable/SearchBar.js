@@ -19,6 +19,7 @@ const Filter =
     onFilterChange,
     filter,
     showReset,
+    fetchData,
     domain,
     form: {
       getFieldDecorator,
@@ -46,7 +47,9 @@ const Filter =
     const handleSearch = () => {
       let fields = getFieldsValue()
       fields = handleFields(fields)
-      onFilterChange(fields)
+      const fliterData = Object.assign({},fetchData,fields)
+      onFilterChange(fliterData)
+
     }
 
     const handleReset = () => {

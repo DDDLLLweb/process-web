@@ -162,9 +162,10 @@ class DataTable extends Component {
       rowSelection,
       dataSource, loading, fetchAction, filter,
       enableSelection, enableDoubleClick, enablePagination, showReset,
-      onSelect, validToSelect, ...tableProps
+      onSelect,onFilterChange, validToSelect, ...tableProps
     } = this.props
-    const { pagination, selectedRowKeys, columns } = this.state
+    const { pagination, selectedRowKeys, columns, fetchData } = this.state
+    console.log(fetchData)
     const visibleColumns = columns.filter(c => c.visible !== false)
     pagination.total = this.props.total
     const elRowSelection = {
@@ -182,7 +183,8 @@ class DataTable extends Component {
       <div>
         {filter && <SearchBar
           showReset={showReset}
-          onFilterChange={this.onFilterChange}
+          onFilterChange={onFilterChange}
+          fetchData = {fetchData}
           filter={filter}
         />}
         <Table

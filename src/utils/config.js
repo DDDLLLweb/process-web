@@ -27,6 +27,8 @@ export default {
       menus: '/auth/api/menus',// 获取菜单
       users: '/auth/api/users',// 获取系统用户
       user: '/auth/api/user', // 用户新增或修改
+      roles: '/auth/api/roles', //获取角色
+      role: '/auth/api/role', //角色修改
     },
   },
 }

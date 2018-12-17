@@ -3,7 +3,7 @@ import * as userService from '../../../service/users'
 import { REC_GET_USERS, REC_USER_SINGLE, hideModal,DO_USER_QUERY } from '../../action/users'
 import { message } from 'antd'
 
-export function* loadUsers(payload) {
+export function* loadUsers({ payload }) {
   const response = yield call(userService.pages,payload)
   if (response.success) {
     const { rows, total } = response.data

@@ -36,6 +36,12 @@ class User extends React.Component  {
     const tableProps = {
       rowKey: 'id',
       fetchAction: this.fetchList,
+      onFilterChange:(fields)=>{ 
+        dispatch({
+          type: DO_USER_QUERY,
+          payload: fields,
+        })
+      },
       buttons: [{
         type: 'primary',
         action: 'add',

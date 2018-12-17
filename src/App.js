@@ -46,7 +46,7 @@ class App extends Component {
               {routesNode}
             </Content>
             <Footer style={{ textAlign: 'center' }}>
-              Ant Design ©2018 Created by DL
+             
             </Footer>
           </Layout>
         </Layout>

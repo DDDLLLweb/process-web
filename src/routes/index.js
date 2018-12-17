@@ -2,7 +2,7 @@ import React from 'react'
 import { Route } from 'react-router-dom'
 import { MainContent } from '../components/'
 import Metaqtable from '../pages/metactl'
-import { User } from '../pages/system/'
+import { User, Role } from '../pages/system/'
 export const childRoutes = [
   {
     'path':'/app/dashboard',
@@ -15,6 +15,10 @@ export const childRoutes = [
   {
     'path':'/app/system/users',
     'component': User,
+  },
+  {
+    'path':'/app/system/roles',
+    'component': Role,
   },
   {
     'path':'/app/',

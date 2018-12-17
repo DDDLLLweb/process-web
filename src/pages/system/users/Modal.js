@@ -33,13 +33,13 @@ const modal =
     onOk,
     onCancel,
     dispatch,
-    loading,
+    loading,  
     form: {
       getFieldDecorator,
       validateFields,
       getFieldsValue,
     },
-    ...modalProps
+    ...modalProps   
   }) => {
     const items = [{
       title: '用户名',
