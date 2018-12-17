@@ -25,7 +25,7 @@ class Role extends React.Component  {
     // const domainCN = '角色'
     const { dispatch, roles } = this.props
     const { list, total} = roles
-   
+    console.log("roles",roles,this.props)
     const tableProps = {
       rowKey: 'id',
       fetchAction: this.fetchList,
