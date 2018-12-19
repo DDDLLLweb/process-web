@@ -1,19 +1,48 @@
 import { call, put } from 'redux-saga/effects'
 import * as roleService from '../../../service/roles'
-import { REC_GET_ROLES } from '../../action/roles'
-
+import { REC_GET_ROLES, REC_ROLE_SINGLE, hideModal, DO_ROLE_QUERY } from '../../action/roles'
+import { message } from 'antd'
 export function* loadRoles( {payload} ){
   const response = yield call(roleService.pages,payload)
-  if(response.sucess){
+  if(response.success){
     const { rows, total } = response.data
-    console.log("+++++++++++++++++++")
-    console.log("---------",response.data)
     yield put({
       type: REC_GET_ROLES,
       payload: {
         list: rows,
         total: total,
       },
+    })
+  }
+}
+
+export function* optRole({payload}){
+  const response  = yield call(roleService.optRole,payload)
+  if(response.success){
+    yield put(hideModal())
+    yield put({
+      type: DO_ROLE_QUERY,
+    })
+  }
+}
+
+export function* loadSingleRole({payload}){
+  const response  = yield call(roleService.getSingleRole,payload)
+  console.log("response",response)
+  if(response.success){
+    yield put({
+      type: REC_ROLE_SINGLE,
+      payload: response.data,
+    })
+  }
+}
+
+export function* delRoles({payload}){
+  const response = yield call(roleService.delRoles,payload)
+  if (response.success) {
+    message.success('删除成功！')
+    yield put({
+      type: DO_ROLE_QUERY,
     })
   }
 }

@@ -65,6 +65,10 @@ class User extends React.Component  {
         action: 'view',
         name: '查看',
         cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
+          dispatch({
+            type: DO_USER_SINGLE,
+            payload: selectedRowKeys[0],
+          })
           dispatch(showModal('view'))
         },
       }, {

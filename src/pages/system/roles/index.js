@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { DataTable } from '../../../components'
-import { DO_ROLE_QUERY  } from '../../../redux/action/roles'
-
+import { DO_ROLE_QUERY, DO_ROLE_INSERT, DO_ROLE_SINGLE, DO_ROLE_DELETE, hideModal, showModal } from '../../../redux/action/roles'
+import Modal from './Modal'
 class Role extends React.Component  {
   constructor(props) {
     super(props)
@@ -21,20 +21,26 @@ class Role extends React.Component  {
   }
  
   render() {
-    // const domain = 'roles'
-    // const domainCN = '角色'
+    const domain = 'roles'
+    const domainCN = '角色'
     const { dispatch, roles } = this.props
-    const { list, total} = roles
-    console.log("roles",roles,this.props)
+    const { list, total, mode='create', modalVisible,currentItem} = roles
+    console.log("roles",roles,this.props,modalVisible)
     const tableProps = {
       rowKey: 'id',
       fetchAction: this.fetchList,
+      onFilterChange:(fields)=>{ 
+        dispatch({
+          type: DO_ROLE_QUERY,
+          payload: fields,
+        })
+      },
       buttons: [{
         type: 'primary',
         action: 'add',
         name: '新增',
         cb: () => { 
-
+          dispatch(showModal('create'))
         },
       }, {
         type: 'primary',
@@ -42,16 +48,20 @@ class Role extends React.Component  {
         name: '修改',
         cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
           dispatch({
-            // type: DO_USER_SINGLE,
-            // payload: selectedRowKeys[0],
+            type: DO_ROLE_SINGLE,
+            payload: selectedRowKeys[0],
           })
-        //   dispatch(showModal('update'))
+          dispatch(showModal('update'))
         },
       }, {
         action: 'view',
         name: '查看',
         cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
-        //   dispatch(showModal('view'))
+          dispatch({
+            type: DO_ROLE_SINGLE,
+            payload: selectedRowKeys[0],
+          })
+          dispatch(showModal('view'))
         },
       }, {
         type: 'danger',
@@ -59,12 +69,17 @@ class Role extends React.Component  {
         name: '删除',
         cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
           dispatch({
-            // type: DO_USER_DELETE,
+            type: DO_ROLE_DELETE,
             payload: selectedRowKeys,
           })
         },
       }],
       filter: [
+        {
+          title: '角色编码',
+          dataIndex: 'roleCode',
+          options: {},
+        }, 
         {
           title: '角色名称',
           dataIndex: 'roleName',
@@ -101,11 +116,34 @@ class Role extends React.Component  {
         },
       ],
     }
-    
+    const modalProps = {
+      dispatch,
+      mode,
+      domain,
+      record: currentItem || {},
+      visible: modalVisible,
+      maskClosable: false,
+      width: '60%',
+      readOnly: mode === 'view',
+      title: mode === 'create' ? `新增${domainCN}` : mode === 'update' ? `修改${domainCN}` : `查看${domainCN}`,
+      wrapClassName: 'vertical-center-modal',
+      onOk(data) {
+        console.log(data)
+        dispatch({
+          type: DO_ROLE_INSERT,
+          payload: data,
+        })
+      },
+      onCancel() {
+        dispatch(hideModal())
+      },
+    }
+
 
     return (
       <div>
         <DataTable {...tableProps}/>
+        {modalVisible && <Modal {...modalProps} />}
       </div>
     )
   }
