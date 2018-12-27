@@ -19,5 +19,6 @@ export const hideModal = () => ({
   payload: {
     modalVisible: false,
     mode: 'create',
+    currentItem: {},
   },
 })   
