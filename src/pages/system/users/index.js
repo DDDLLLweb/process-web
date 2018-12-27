@@ -26,7 +26,6 @@ class User extends React.Component  {
     const domain = 'users'
     const domainCN = '用户'
     const { dispatch, users } = this.props
-    console.log("users",users,this.props)
     const { list, total, mode='create', modalVisible,currentItem } = users
     const handleRefreshPass = record => {
       dispatch({

@@ -69,3 +69,35 @@ small {
   display: inline-block;
   text-align: center;
 }
+
+
+// --------------------------  table
+.ant-table {
+  &.ant-table-small > .ant-table-content > .ant-table-body {
+    margin: 0;
+  }
+
+  &.ant-table-fixed tr > th,
+  &.ant-table-fixed tr > td,
+  & tr > th,
+  & tr > td {
+    padding: 8px 8px;
+  }
+
+  .ant-table-thead tr > th {
+    white-space: nowrap;
+  }
+
+  .ant-table-tbody > tr > td.ant-table-column-sort {
+    background: transparent;
+  }
+
+  .ant-table-thead > tr > th {
+    // background: #27395f !important;
+    color: #333 !important;
+    font-size: 14px !important;
+    font-weight: bold !important;
+    text-align: center;
+  }
+
+}

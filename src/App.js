@@ -42,7 +42,7 @@ class App extends Component {
           </Sider>
           <Layout>
             <HeaderCustom toggle={this.toggle} collapsed={this.state.collapsed} user={{ auth } || {}} />
-            <Content>
+            <Content style={{padding:20}}>
               {routesNode}
             </Content>
             <Footer style={{ textAlign: 'center' }}>

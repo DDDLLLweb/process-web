@@ -28,7 +28,6 @@ export function* optRole({payload}){
 
 export function* loadSingleRole({payload}){
   const response  = yield call(roleService.getSingleRole,payload)
-  console.log("response",response)
   if(response.success){
     yield put({
       type: REC_ROLE_SINGLE,

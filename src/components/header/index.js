@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Menu, Icon, Badge,Layout} from 'antd'
+import { Menu, Icon, Badge, Layout, Avatar} from 'antd'
 import { connect } from 'react-redux'
 import screenfull from 'screenfull'
+import b1 from '../../style/imgs/b1.jpg'
 import {API_LOGINOUT } from '../../redux/action/app/index'
 const {Header} = Layout
 const SubMenu = Menu.SubMenu
@@ -36,13 +37,11 @@ class HeaderCustom extends Component{
                 <Icon type="notification" />
               </Badge>
             </Menu.Item>
-            <SubMenu title={<span className="avatar">oooooo</span>}>
+            <SubMenu title={<Avatar style={{ backgroundColor: '#fff' }} src={b1} />}>
               <MenuItemGroup title="用户中心">
                 <Menu.Item key="setting:1">你好 - {this.props.user.userName}</Menu.Item>
                 <Menu.Item key="setting:2">个人信息</Menu.Item>
                 <Menu.Item key="logout" onClick={this.loginOut}><span>退出登录</span></Menu.Item>
-
-                        
               </MenuItemGroup>
               <MenuItemGroup title="设置中心">
                 <Menu.Item key="setting:3">个人设置</Menu.Item>

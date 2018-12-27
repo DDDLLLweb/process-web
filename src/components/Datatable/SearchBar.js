@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Button, Col, Form, Input, Row, Card } from 'antd'
+import { Button, Col, Form, Input, Row } from 'antd'
+import './SearchBar.less'
 const FormItem = Form.Item
 
 const ColProps = {
@@ -47,7 +48,7 @@ const Filter =
     const handleSearch = () => {
       let fields = getFieldsValue()
       fields = handleFields(fields)
-      const fliterData = Object.assign({},fetchData,fields)
+      const fliterData = Object.assign({}, fetchData, fields)
       onFilterChange(fliterData)
 
     }
@@ -98,7 +99,7 @@ const Filter =
         <Col key={item.dataIndex} {...ColProps} {...item.colProps}>
           <FormItem {...formItemLayout} {...item.formItemLayout} label={item.title}>
             {getFieldDecorator(item.dataIndex, { ...item.options })(item.tag ||
-              <Input size="large" onPressEnter={handleSearch} />)
+              <Input onPressEnter={handleSearch} />)
             }
           </FormItem>
         </Col>
@@ -106,33 +107,29 @@ const Filter =
     }
 
     return (
-      <Card>
-        <Row gutter={4}>
-          <Col span={22}>
-            <Row type="flex" justify="space-betwee" align="middle">
-              {filter.map(item => renderItem(item, domain))}
-            </Row>
-          </Col>
+      <Row gutter={4} className="searchRow">
+        <Col span={22}>
+          <Row type="flex" justify="space-betwee" align="middle">
+            {filter.map(item => renderItem(item, domain))}
+          </Row>
+        </Col>
 
-          {(filter && filter.length) && <Col span={2} style={{ textAlign: 'right', marginBottom: 16 }}>
-            <Button
-              size="large"
-              className="margin-right"
-              shape="circle"
-              icon="search"
-              onClick={handleSearch}
-              style={{ marginBottom: 8, marginRight: 8 }}
-            />
-            {showReset !== false && <Button
-              size="large"
-              className="margin-right"
-              shape="circle"
-              icon="sync"
-              onClick={handleReset}
-            />}
-          </Col>}
-        </Row>
-      </Card>
+        {(filter && filter.length) && <Col span={2} style={{ textAlign: 'right', marginBottom: 16 }}>
+          <Button
+            className="margin-right"
+            shape="circle"
+            icon="search"
+            onClick={handleSearch}
+            style={{ marginBottom: 8, marginRight: 8 }}
+          />
+          {showReset !== false && <Button
+            className="margin-right"
+            shape="circle"
+            icon="sync"
+            onClick={handleReset}
+          />}
+        </Col>}
+      </Row>
     )
   }
 

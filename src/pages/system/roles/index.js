@@ -13,7 +13,6 @@ class Role extends React.Component  {
 
   fetchList = (params) => {
     const { dispatch } = this.props
-    // console.log("dispatch",dispatch)
     dispatch({
       type: DO_ROLE_QUERY,
       payload: params,
@@ -25,7 +24,6 @@ class Role extends React.Component  {
     const domainCN = '角色'
     const { dispatch, roles } = this.props
     const { list, total, mode='create', modalVisible,currentItem} = roles
-    console.log("roles",roles,this.props,modalVisible)
     const tableProps = {
       rowKey: 'id',
       fetchAction: this.fetchList,
@@ -128,7 +126,6 @@ class Role extends React.Component  {
       title: mode === 'create' ? `新增${domainCN}` : mode === 'update' ? `修改${domainCN}` : `查看${domainCN}`,
       wrapClassName: 'vertical-center-modal',
       onOk(data) {
-        console.log(data)
         dispatch({
           type: DO_ROLE_INSERT,
           payload: data,

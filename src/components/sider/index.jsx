@@ -23,7 +23,6 @@ class SiderMenu extends React.Component {
         method: 'get',
       }).then((data) => {
         if (data.success) {
-          console.log(data)
           dataUtil.arrayToTree(data.data)
           let menuTree = dataUtil.arrayToTree(data.data.filter(_ => _.menuType !== 'C'), 'menuId', 'upperId')
           this.setState({
@@ -50,7 +49,6 @@ class SiderMenu extends React.Component {
             </SubMenu>
           )
         }
-        // console.log('item',item)
         return (
           <Menu.Item key={item.menuId}>
             <Link to={`/app${item.menuUri}`}>

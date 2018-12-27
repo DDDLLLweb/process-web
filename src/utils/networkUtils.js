@@ -16,7 +16,6 @@ const { basic } = api
 // let failed = false
 
 // Default config of axios
-console.info(`API Server: ${baseURL}`)
 axios.defaults = Object.assign(axios.defaults, {
   baseURL,
   timeout: 10000,
@@ -60,7 +59,6 @@ const csrf = (() => axios.get(basic.csrf)
 
 const makeHeaders = headers => {
   const accessToken = localStorage.getItem(AUTHIZARION)
-  console.log('---===--,{}', accessToken)
   return Object.assign({}, _csrfHeaders(headers), { 'Authorization': `Bearer ${accessToken}` })
 }
 

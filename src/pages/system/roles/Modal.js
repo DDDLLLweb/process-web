@@ -127,12 +127,11 @@ const modal =
       ...modalProps,
       onCancel: onCancel,
       footer: [
-        <Button key="back" size="large" onClick={onCancel}>取消</Button>,
+        <Button key="back" onClick={onCancel}>取消</Button>,
         mode !== 'view' &&
         <Button
           key="submit"
           type="primary"
-          size="large"
           onClick={handleOk}
         >保存</Button>,
       ],

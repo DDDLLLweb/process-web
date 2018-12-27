@@ -166,7 +166,6 @@ class DataTable extends Component {
       onSelect,onFilterChange, validToSelect, ...tableProps
     } = this.props
     const { pagination, selectedRowKeys, columns, fetchData } = this.state
-    console.log("fetchdata",fetchData)
     const visibleColumns = columns.filter(c => c.visible !== false)
     pagination.total = this.props.total
     const elRowSelection = {

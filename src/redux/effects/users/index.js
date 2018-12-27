@@ -29,7 +29,6 @@ export function* optUser({payload}) {
 export function* loadSingleUser({payload}) {
   const response = yield call(userService.getSingleUser,payload)
   if (response.success) {
-    console.log(response)
     yield put({
       type: REC_USER_SINGLE,
       payload: response.data,
