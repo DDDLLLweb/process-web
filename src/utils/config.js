@@ -23,6 +23,11 @@ export default {
       principal: '/auth/api/sec/principal', // 登录用户上下文
       resetPW: 'api/ui/password/update',
     },
+    common: {
+      suggest: {
+        roles: '/auth/api/roles/suggest', // 角色下拉
+      },
+    },
     app: {
       menus: '/auth/api/menus',// 获取菜单
       users: '/auth/api/users',// 获取系统用户

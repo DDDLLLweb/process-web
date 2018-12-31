@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, Col, Form, Input, Modal, Row, Radio } from 'antd'
-
+import { SuggestSelect } from '../../../components'
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
 const formItemLayout = {
@@ -104,6 +104,19 @@ const modal =
         <Radio value={0}>男</Radio>
         <Radio value={1}>女</Radio>
       </RadioGroup>,
+    },
+    {
+      title: '性别',
+      dataIndex: 'roles',
+      options: {
+        rules: [
+          {
+            required: true,
+            message: '必填',
+          },
+        ],
+      },
+      tag: <SuggestSelect mode="multiple" apiName="roles" />,
     },
     ]
     
