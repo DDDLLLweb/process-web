@@ -84,7 +84,7 @@ class DataTable extends Component {
                     {b.name}
                   </Button>
                 )
-              } else if (b.action === 'update' || b.action === 'view') {
+              } else if (b.action === 'update' || b.action === 'view' || b.action === 'dealMenu') {
                 if (selectedRowKeys.length === 1) {
                   return (
                     <Button

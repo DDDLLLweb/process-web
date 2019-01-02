@@ -1,4 +1,4 @@
-import { REC_GET_USERS, REC_SHOW_MODAL, REC_HIDE_MODAL, REC_USER_SINGLE } from '../../action/users'
+import { REC_GET_USERS, REC_SHOW_MODAL, REC_HIDE_MODAL, REC_USER_SINGLE,REC_SHOW_MENUMODAL,REC_HIDE_MENUMODAL} from '../../action/users'
 
 const pages = (state, payload) => {
   const newUsers = Object.assign({}, state, payload)
@@ -24,6 +24,10 @@ const users = (state = {}, { type, payload }) => {
     case REC_SHOW_MODAL:
       return updateState(state, payload)
     case REC_HIDE_MODAL:
+      return updateState(state, payload)
+    case REC_SHOW_MENUMODAL:
+      return updateState(state, payload)
+    case REC_HIDE_MENUMODAL:
       return updateState(state, payload)
     case REC_USER_SINGLE:
       // return Object.assign({}, state, {currentItem: payload})
