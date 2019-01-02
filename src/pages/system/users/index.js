@@ -150,6 +150,9 @@ class User extends React.Component  {
           type: DO_USER_INSERT,
           payload: data,
         })
+        dispatch({
+          type: DO_USER_QUERY,
+        })
       },
       onCancel() {
         dispatch(hideModal())
