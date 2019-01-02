@@ -2,8 +2,9 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { Popconfirm, Button } from 'antd'
 import { DataTable } from '../../../components'
-import { DO_USER_QUERY, DO_USER_INSERT, DO_USER_SINGLE,DO_USER_DELETE,DO_USER_REFRESH_PWD, showModal, hideModal  } from '../../../redux/action/users'
+import { DO_USER_QUERY, DO_USER_INSERT, DO_USER_SINGLE,DO_USER_DELETE,DO_USER_REFRESH_PWD, showModal, hideModal, showMenuModal, hideMenuModal } from '../../../redux/action/users'
 import Modal from './Modal'
+import MenuModal from './MenuModal'
 
 
 class User extends React.Component  {
@@ -26,7 +27,7 @@ class User extends React.Component  {
     const domain = 'users'
     const domainCN = '用户'
     const { dispatch, users } = this.props
-    const { list, total, mode='create', modalVisible,currentItem } = users
+    const { list, total, mode='create', modalVisible,currentItem ,menuModalVisible} = users
     const handleRefreshPass = record => {
       dispatch({
         type: DO_USER_REFRESH_PWD,
@@ -79,6 +80,14 @@ class User extends React.Component  {
             type: DO_USER_DELETE,
             payload: selectedRowKeys,
           })
+        },
+      },{
+        type: 'primary',
+        action: 'dealMenu',
+        name:'菜单权限管理',
+        cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
+          dispatch(showMenuModal())
+          console.log(11111)
         },
       }],
       filter: [
@@ -155,11 +164,32 @@ class User extends React.Component  {
         dispatch(hideModal())
       },
     }
+    const menuModalProps = {
+      dispatch,
+      domain,
+      record: currentItem || {},
+      visible: menuModalVisible,
+      maskClosable: false,
+      width: '60%',
+      title: '修改菜单权限',
+      wrapClassName: 'vertical-center-modal',
+      onOk() {
+        // dispatch({
+        // type: DO_USER_INSERT,
+        // payload: data,
+        // })
+        dispatch(hideMenuModal())
+      },
+      onCancel() {
+        dispatch(hideMenuModal())
+      },
+    }
 
     return (
       <div>
         <DataTable {...tableProps}/>
         {modalVisible && <Modal {...modalProps} />}
+        {menuModalVisible && <MenuModal {...menuModalProps}/>}
       </div>
     )
   }

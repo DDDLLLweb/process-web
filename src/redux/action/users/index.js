@@ -6,6 +6,9 @@ export const DO_USER_REFRESH_PWD = 'DO_USER_REFRESH_PWD'
 export const REC_GET_USERS = 'REC_GET_USERS'
 export const REC_SHOW_MODAL = 'REC_SHOW_MODAL'
 export const REC_HIDE_MODAL = 'REC_HIDE_MODAL'
+export const REC_SHOW_MENUMODAL = 'REC_SHOW_MENUMODAL'
+export const REC_HIDE_MENUMODAL = 'REC_HIDE_MENUMODAL'
+
 export const REC_USER_SINGLE = 'REC_USER_SINGLE'
 export const showModal = (type) => ({
   type: REC_SHOW_MODAL,
@@ -21,4 +24,19 @@ export const hideModal = () => ({
     mode: 'create',
     currentItem: {},
   },
-})   
+}) 
+//showMenuModal  
+export const showMenuModal = () => ({
+  type: REC_SHOW_MENUMODAL,
+  payload: {
+    menuModalVisible: true,
+  },
+  
+})
+export const hideMenuModal = () => ({
+  type: REC_HIDE_MENUMODAL,
+  payload: {
+    menuModalVisible: false,
+    currentItem: {},
+  },
+}) 
