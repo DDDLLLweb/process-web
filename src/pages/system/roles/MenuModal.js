@@ -24,7 +24,7 @@ class MenuModal extends React.Component {
       <Modal
         {...modalOpts}
       >
-        <TreeMenu userId={record.id} />
+        <TreeMenu roleId={record.id}/>
       </Modal>
     )
   }

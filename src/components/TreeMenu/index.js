@@ -79,12 +79,12 @@ class TreeMenu extends React.Component {
   renderTreeNodes = data => data.map((item) => {
     if (item.children) {
       return (
-        <TreeNode title={item.title} key={item.key} dataRef={item} icon={<Icon type={item.menuIcon} />}>
+        <TreeNode title={item.menuLabel} key={item.menuId} dataRef={item} icon={<Icon type={item.menuIco} />}>
           {this.renderTreeNodes(item.children)}
         </TreeNode>
       )
     }
-    return <TreeNode {...item} key={item.key} icon={<Icon type={item.menuIcon} />} />
+    return <TreeNode title={item.menuLabel} key={item.menuId} icon={<Icon type={item.menuIco} />} />
   })
   fetchData = (params, cb) => {
     this.setState({ fetching: true })
@@ -97,11 +97,11 @@ class TreeMenu extends React.Component {
           dataSource: data.data,
           fetching: false,
         }, () => {
-          const { userId } = this.props
+          const { roleId } = this.props
           networkUtils.request({
             method: 'get',
             url: userMenu,
-            data: { userId: userId },
+            data: { roleId: roleId },
           }).then((data) => {
             if (data.success) {
               const menuIds = data.data.map(menu => menu.menuId)

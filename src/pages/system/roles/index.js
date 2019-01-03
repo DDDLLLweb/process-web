@@ -1,8 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { DataTable } from '../../../components'
-import { DO_ROLE_QUERY, DO_ROLE_INSERT, DO_ROLE_SINGLE, DO_ROLE_DELETE, hideModal, showModal } from '../../../redux/action/roles'
+import { DO_ROLE_QUERY, DO_ROLE_INSERT, DO_ROLE_SINGLE, DO_ROLE_DELETE, hideModal, showModal,showMenuModal, hideMenuModal } from '../../../redux/action/roles'
 import Modal from './Modal'
+import MenuModal from './MenuModal'
 class Role extends React.Component  {
   constructor(props) {
     super(props)
@@ -23,7 +24,7 @@ class Role extends React.Component  {
     const domain = 'roles'
     const domainCN = '角色'
     const { dispatch, roles } = this.props
-    const { list, total, mode='create', modalVisible,currentItem} = roles
+    const { list, total, mode='create', modalVisible,currentItem, menuModalVisible } = roles
     const tableProps = {
       rowKey: 'id',
       fetchAction: this.fetchList,
@@ -70,6 +71,14 @@ class Role extends React.Component  {
             type: DO_ROLE_DELETE,
             payload: selectedRowKeys,
           })
+        },
+      },{
+        type: 'primary',
+        action: 'dealMenu',
+        name:'菜单权限管理',
+        cb: (selectedRowKeys, searchBarForm, selectedRows) => { 
+          dispatch(showMenuModal())
+          console.log(11111)
         },
       }],
       filter: [
@@ -135,12 +144,32 @@ class Role extends React.Component  {
         dispatch(hideModal())
       },
     }
-
+    const menuModalProps = {
+      dispatch,
+      domain,
+      record: currentItem || {},
+      visible: menuModalVisible,
+      maskClosable: false,
+      width: '60%',
+      title: '菜单权限管理',
+      wrapClassName: 'vertical-center-modal',
+      onOk() {
+        // dispatch({
+        // type: DO_USER_INSERT,
+        // payload: data,
+        // })
+        dispatch(hideMenuModal())
+      },
+      onCancel() {
+        dispatch(hideMenuModal())
+      },
+    }
 
     return (
       <div>
         <DataTable {...tableProps}/>
         {modalVisible && <Modal {...modalProps} />}
+        {menuModalVisible && <MenuModal {...menuModalProps}/>}
       </div>
     )
   }
