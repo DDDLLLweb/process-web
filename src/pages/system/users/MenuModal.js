@@ -18,13 +18,13 @@ class MenuModal extends React.Component {
   }
 
   render() {
-    const {...modalOpts} = this.props
+    const modalOpts = this.props
+    const { record } = modalOpts
     return (
       <Modal
-        title="Menu Modal"
         {...modalOpts}
       >
-        <TreeMenu />
+        <TreeMenu userId={record.id} />
       </Modal>
     )
   }

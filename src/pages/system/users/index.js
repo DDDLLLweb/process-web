@@ -174,7 +174,7 @@ class User extends React.Component  {
       visible: menuModalVisible,
       maskClosable: false,
       width: '60%',
-      title: '修改菜单权限',
+      title: '菜单权限管理',
       wrapClassName: 'vertical-center-modal',
       onOk() {
         // dispatch({

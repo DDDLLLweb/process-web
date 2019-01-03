@@ -27,6 +27,7 @@ export default {
       suggest: {
         roles: '/auth/api/roles/suggest', // 角色下拉
       },
+      userMenu: '/auth/api/menus/all',
     },
     app: {
       menus: '/auth/api/menus',// 获取菜单
