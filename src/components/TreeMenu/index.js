@@ -75,7 +75,6 @@ class TreeMenu extends React.Component {
 
   onSelect = (selectedKeys, info) => {
     this.setState({ selectedKeys })
-    console.log("selectedKeys",selectedKeys)
   }
 
   renderTreeNodes = data => data.map((item) => {
