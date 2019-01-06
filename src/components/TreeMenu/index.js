@@ -2,7 +2,7 @@ import React from 'react'
 import { Tree, Icon } from 'antd'
 import debounce from 'lodash.debounce'
 const { TreeNode } = Tree
-import { networkUtils, config } from '../../utils'
+import { networkUtils, config, dataUtil } from '../../utils'
 import './index.less'
 const { api } = config
 const { common } = api
@@ -69,11 +69,13 @@ class TreeMenu extends React.Component {
   }
 
   onCheck = (checkedKeys) => {
+    this.props.changeTreeMenuIds(checkedKeys)
     this.setState({ checkedKeys })
   }
 
   onSelect = (selectedKeys, info) => {
     this.setState({ selectedKeys })
+    console.log("selectedKeys",selectedKeys)
   }
 
   renderTreeNodes = data => data.map((item) => {
@@ -93,8 +95,10 @@ class TreeMenu extends React.Component {
       url: userMenu,
     }).then(data => {
       if (data.success) {
+        // dataUtil.arrayToTree(data.data)
+        let menuTree = dataUtil.arrayToTree(data.data.filter(_ => _.menuType !== 'C'), 'menuId', 'upperId')
         this.setState({
-          dataSource: data.data,
+          dataSource: menuTree,
           fetching: false,
         }, () => {
           const { roleId } = this.props
@@ -105,8 +109,10 @@ class TreeMenu extends React.Component {
           }).then((data) => {
             if (data.success) {
               const menuIds = data.data.map(menu => menu.menuId)
+              this.props.changeTreeMenuIds(menuIds)
               this.setState({
-                selectedKeys: menuIds || [],
+                // selectedKeys: menuIds || [],
+                checkedKeys: menuIds || [],
               })
             }
           })

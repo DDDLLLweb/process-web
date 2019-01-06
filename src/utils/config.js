@@ -35,6 +35,7 @@ export default {
       user: '/auth/api/user', // 用户新增或修改
       roles: '/auth/api/roles', //获取角色
       role: '/auth/api/role', //角色修改
+      roleMenu: '/auth/api/menus/bind', //角色修改
     },
   },
 }

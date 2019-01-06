@@ -1,6 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import * as roleService from '../../../service/roles'
-import { REC_GET_ROLES, REC_ROLE_SINGLE, hideModal, DO_ROLE_QUERY } from '../../action/roles'
+import { REC_GET_ROLES, REC_ROLE_SINGLE, hideModal, DO_ROLE_QUERY,hideMenuModal } from '../../action/roles'
 import { message } from 'antd'
 export function* loadRoles( {payload} ){
   const response = yield call(roleService.pages,payload)
@@ -43,5 +43,13 @@ export function* delRoles({payload}){
     yield put({
       type: DO_ROLE_QUERY,
     })
+  }
+}
+//
+export function* updateRoleMenu({payload}){
+  const response = yield call(roleService.updateRoleMenu,payload)
+  if (response.success) {
+    message.success('更新成功')
+    yield put(hideMenuModal())
   }
 }

@@ -106,7 +106,7 @@ const modal =
       </RadioGroup>,
     },
     {
-      title: '性别',
+      title: '角色',
       dataIndex: 'roles',
       options: {
         rules: [
