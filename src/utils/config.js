@@ -18,7 +18,7 @@ export default {
     basic: {
       csrf: '/api/sec/csrf', // CSRF检查
       userLogin: '/api/sec/login', // 登录
-      userLogout: '/sec/logout', // 退出
+      userLogout: '/api/sec/logout', // 退出
       captcha: '/sec/captcha', // 验证码
       principal: '/auth/api/sec/principal', // 登录用户上下文
       resetPW: 'api/ui/password/update',

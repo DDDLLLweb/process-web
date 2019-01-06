@@ -22,7 +22,7 @@ export async function login(data) {
 export async function loginOut() {
   return request({
     url: userLogout,
-    method: 'post',
+    method: 'get',
   })
 }
 

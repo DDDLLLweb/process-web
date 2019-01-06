@@ -29,6 +29,7 @@ export function* doLogin({payload}) {
 export function* doLoginOut() {
   const data = yield call(appService.loginOut)
   if(data.success) {
+    localStorage.removeItem("PS_ACCESS_TOKEN")
     yield put(push('/login'))
   }
 }
