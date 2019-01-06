@@ -36,7 +36,7 @@ class SiderMenu extends React.Component {
     // 递归生成菜单
     getMenus = (menuData,inlineCollapsed) =>{
       return menuData.map(((item) => {
-        if (item.children) {
+        if (item.children && item.children.length>0) {
           return (
             <SubMenu
               key={item.menuId}
