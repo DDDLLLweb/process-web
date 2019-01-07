@@ -4,7 +4,7 @@
 import React from 'react'
 import { DO_CAPTCHA } from '../../redux/action/login'
 import { DO_LOGIN } from '../../redux/action/app'
-import { Avatar, Form, Icon, Input,Button } from 'antd'
+import { Avatar, Form, Icon, Input,Button, Checkbox } from 'antd'
 import { connect } from 'react-redux'
 import { push } from 'react-router-redux'
 import b1 from '../../style/imgs/b1.jpg'
@@ -91,12 +91,12 @@ class LoginForm extends React.Component {
             </Row>
               </FormItem>**/}
           <FormItem>
-            {/**{getFieldDecorator('rememberMe', {
+            {getFieldDecorator('rememberMe', {
               valuePropName: 'checked',
               initialValue: true,
             })(
               <Checkbox>记住我</Checkbox>
-            )}**/}
+            )}
             <Button type="primary" htmlType="submit" className="login-form-button">
               登录
             </Button>
